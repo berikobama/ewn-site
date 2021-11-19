@@ -16,7 +16,7 @@ def checkins():
 def list_table_content():
     connection = sqlite3.connect("../checkins.db")
     cursor = connection.cursor()
-    cursor.execute("SELECT * FROM checkins where datetime(last_checkin) >= datetime('now','-14 days');")
+    cursor.execute("SELECT * FROM checkins where datetime(last_checkin) >= datetime('now','-28 days');")
     calls = cursor.fetchall()
     connection.close()
     return calls
