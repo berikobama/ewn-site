@@ -1,4 +1,6 @@
 import sqlite3
+import psycopg2
+import os
 from flask import Flask
 from flask import render_template
 
@@ -14,9 +16,9 @@ def checkins():
     return render_template('checkins.html', entries=calls)
 
 def list_table_content():
-    connection = sqlite3.connect("../checkins.db")
+    connection = psycopg2.connect(os.environ.get("DATABASE_URL"))
     cursor = connection.cursor()
-    cursor.execute("SELECT * FROM checkins where datetime(last_checkin) >= datetime('now','-28 days');")
+    cursor.execute("SELECT * FROM checkins;")
     calls = cursor.fetchall()
     connection.close()
     return calls
