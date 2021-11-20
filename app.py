@@ -18,7 +18,7 @@ def checkins():
 def list_table_content():
     connection = psycopg2.connect(os.environ.get("DATABASE_URL"))
     cursor = connection.cursor()
-    cursor.execute("SELECT * FROM checkins;")
+    cursor.execute("SELECT callsigns,name,locator,bands,modes,schedule,comment,DATE(last_checkin) FROM checkins;")
     calls = cursor.fetchall()
     connection.close()
     return calls
