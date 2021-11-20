@@ -30,9 +30,10 @@ def download_stations_csv():
     calls = list_table_content()
     si = io.StringIO()
     cw = csv.writer(si)
+    cw.writerow(["callsign","name","locator","bands","modes","schedule","comment","last_checkin"])
     cw.writerows(calls)
     output = make_response(si.getvalue())
-    output.headers["Content-Disposition"] = "attachment; filename=export.csv"
+    output.headers["Content-Disposition"] = "attachment; filename=ewn_stations.csv"
     output.headers["Content-type"] = "text/csv"
     return output
 
