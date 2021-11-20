@@ -1,8 +1,10 @@
 import sqlite3
 import psycopg2
 import os
+import io
+import csv
 from flask import Flask
-from flask import render_template
+from flask import render_template, make_response
 
 app = Flask(__name__)
 
@@ -22,6 +24,17 @@ def list_table_content():
     calls = cursor.fetchall()
     connection.close()
     return calls
+
+@app.route('/download_stations_csv')
+def download_stations_csv():
+    calls = list_table_content()
+    si = io.StringIO()
+    cw = csv.writer(si)
+    cw.writerows(calls)
+    output = make_response(si.getvalue())
+    output.headers["Content-Disposition"] = "attachment; filename=export.csv"
+    output.headers["Content-type"] = "text/csv"
+    return output
 
 if __name__ == '__main__':
     app.run(threaded=True)
