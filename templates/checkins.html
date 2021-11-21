@@ -1,74 +1,47 @@
 <!DOCTYPE html>
 <html>
-<head>
-<style>
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-</style>
-</head>
-<body>
-
-<h2>Check-ins</h2>
-
-<table>
-  <tr>
-    <th>Callsign</th>
-    <th>Name</th>
-    <th>Location</th>
-    <th>Bands</th>
-    <th>Modes</th>
-    <th>Schedule</th>
-    <th>Comment</th>
-    <th>Last check-in</th>
-  </tr>
-  {% for entry in entries %}
-  <tr>
-    <th><a href="https://www.qrz.com/db/{{entry[0]}}">{{entry[0]}}</a></th>
-    <th>{{entry[1]}}</th>
-    <th><a href="https://www.karhukoti.com/maidenhead-grid-square-locator/?grid={{entry[2]}}">{{entry[2]}}</a></th>
-    <th>{{entry[3]}}</th>
-    <th>{{entry[4]}}</th>
-    <th>{{entry[5]}}</th>
-    <th>{{entry[6]}}</th>
-    <th>{{entry[7]}}</th>
-  </tr>
-  {% endfor %}
-  <!-- <tr>
-<th>DO1ESB</th>
-<th>Erik</th>
-<th>JO62</th>
-<th>80/15/10</th>
-<th>JS8,SSB,VARA HF</th>
-<th>MO-WED 19-22</th>
-<th>Only portable, times varying</th>
-<th>2021-11-04 14:13:00+00:00</th>
-</tr>
-<tr>
-<th>DO1LPH</th>
-<th>Steffen</th>
-<th>JN58bq</th>
-<th>80/15/10</th>
-<th>JS8,SSB,CW,ARDOP</th>
-<th>MO-THU 19-22</th>
-<th>congratulations on starting the net! 73!</th>
-<th>2021-11-04 18:38:00+00:00</th> -->
-<!-- </tr> -->
-
-
-</table>
-
-</body>
+   <head>
+      <style>
+         table {
+		 font-family: arial, sans-serif;
+		 border-collapse: collapse;
+		 width: 100%;
+         }
+         td, th {
+		 border: 1px solid #dddddd;
+		 text-align: left;
+		 padding: 8px;
+         }
+		 tr:nth-child(even) {
+		 background-color: #dddddd;
+         }
+      </style>
+   </head>
+   <body>
+      <h2>Check-ins</h2>
+      <table>
+         <tr>
+            <th>Callsign</th>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Bands</th>
+            <th>Modes</th>
+            <th>Schedule</th>
+            <th>Comment</th>
+            <th>Last check-in</th>
+         </tr>
+         {% for entry in entries %}
+         <tr>
+            <th><a href="https://www.qrz.com/db/{{entry[0]}}">{{entry[0]}}</a></th>
+            <th>{{entry[1]}}</th>
+            <th><a href="https://www.karhukoti.com/maidenhead-grid-square-locator/?grid={{entry[2]}}">{{entry[2]}}</a></th>
+            <th>{{entry[3]}}</th>
+            <th>{{entry[4]}}</th>
+            <th>{{entry[5]}}</th>
+            <th>{{entry[6]}}</th>
+            <th>{{entry[7]}}</th>
+         </tr>
+         {% endfor %}
+      </table>
+   </body>
 </html>
