@@ -1,8 +1,10 @@
 import sqlite3
 import psycopg2
 import os
+import json
 import io
 import csv
+import maidenhead as mh
 from flask import Flask
 from flask import render_template, make_response
 
@@ -36,6 +38,18 @@ def download_stations_csv():
     output.headers["Content-Disposition"] = "attachment; filename=ewn_stations.csv"
     output.headers["Content-type"] = "text/csv"
     return output
+    
+@app.route('/map_content')
+def map_content():
+    connection = psycopg2.connect(os.environ.get("DATABASE_URL"))
+    cursor = connection.cursor()
+    cursor.execute("SELECT callsigns,locator FROM checkins;")
+    calls = cursor.fetchall()
+    connection.close();
+    calls = [(i, mh.to_location(j, center=True)) for i,j in calls]
+    ret_val = [{"type":"Point","coordinates":[j[1],j[0]], "icon": {"className": "c", "html":"<b class='c'>%s</b>"%i }} for i,j in calls
+    return render_template('map.html', entries=json.dumps(ret_val))
+ 
 
 if __name__ == '__main__':
     app.run(threaded=True)
