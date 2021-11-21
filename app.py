@@ -47,7 +47,7 @@ def map_content():
     calls = cursor.fetchall()
     connection.close();
     calls = [(i, mh.to_location(j, center=True)) for i,j in calls]
-    ret_val = [{"type":"Point","coordinates":[j[1],j[0]], "icon": {"className": "c", "html":"<b class='c'>%s</b>"%i }} for i,j in calls
+    ret_val = [{"type":"Point","coordinates":[j[1],j[0]], "icon": {"className": "c", "html":"<b class='c'>%s</b>"%i }} for i,j in calls]
     return render_template('map.html', entries=json.dumps(ret_val))
  
 
